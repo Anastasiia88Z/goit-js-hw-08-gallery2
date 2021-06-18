@@ -72,6 +72,7 @@ imagesContainer.insertAdjacentHTML("beforeend", cardsMarkup);
 
 imagesContainer.addEventListener("click", onImagesContainerClick);
 
+
 function createGalleryItems(galleryItems) {
   return galleryItems
   
@@ -96,8 +97,10 @@ function createGalleryItems(galleryItems) {
 }
 
 function onImagesContainerClick(evt) {
+
 evt.preventDefault();
 
+  
 
   const isGalleryImage = evt.target.classList.contains("gallery__image");
   if (!isGalleryImage) {
@@ -111,6 +114,7 @@ evt.preventDefault();
   refs.lightboxImage.alt = evt.target.alt;
   
   console.log(evt.target);
+
 }
 
 /*Модальное окно*/
@@ -139,8 +143,6 @@ function onCloseModalWindow() {
   refs.lightboxImage.alt = "";
   window.removeEventListener("keydown", onKeyPressEsc);
 }
-
-
 
 /*Закрытие модального окна по клику на div.lightbox__overlay */
 
