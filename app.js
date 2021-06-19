@@ -68,6 +68,7 @@ const imagesContainer = document.querySelector(".js-gallery");
 
 const cardsMarkup = createGalleryItems(galleryItems);
 
+
 imagesContainer.insertAdjacentHTML("beforeend", cardsMarkup);
 
 imagesContainer.addEventListener("click", onImagesContainerClick);
@@ -96,20 +97,21 @@ function createGalleryItems(galleryItems) {
   .join("");
 }
 
+
 function onImagesContainerClick(evt) {
 
 evt.preventDefault();
 
-  
 
   const isGalleryImage = evt.target.classList.contains("gallery__image");
   if (!isGalleryImage) {
     return;
   }
 
-  /*для открытия модального окна*/
+//   /*для открытия модального окна*/
 
-  onOpenModalWindow ();
+  onOpenModalWindow();
+
   refs.lightboxImage.src = evt.target.dataset.source;
   refs.lightboxImage.alt = evt.target.alt;
   
@@ -124,24 +126,24 @@ const refs = {
   closeModalWindow: document.querySelector('[data-action="close-lightbox"]'),
   lightboxImage: document.querySelector(".lightbox__image"),
 }
-
-/* on open modal window*/ 
+ 
 refs.lightboxImage.addEventListener ("click", onOpenModalWindow);
 
 function onOpenModalWindow () {
-  refs.lightbox.classList.add("is-open");
+  
   window.addEventListener("keydown", onKeyPressEsc);
+  refs.lightbox.classList.add("is-open");
 }
 
 
-/*on close modal window */
 refs.closeModalWindow.addEventListener("click", onCloseModalWindow);
 
 function onCloseModalWindow() {
+  window.removeEventListener("keydown", onKeyPressEsc);
   refs.lightbox.classList.remove("is-open");
   refs.lightboxImage.src = "";
   refs.lightboxImage.alt = "";
-  window.removeEventListener("keydown", onKeyPressEsc);
+  
 }
 
 /*Закрытие модального окна по клику на div.lightbox__overlay */
@@ -164,32 +166,29 @@ function onKeyPressEsc (evt) {
 
 /*Пролистывание изображений галереи в открытом модальном окне клавишами "влево" и "вправо". */
 
-// window.addEventListener("keydown", flippingPictures);
+window.addEventListener("keydown", flippingPictures);
 
-// let originImage = [];
+const originImage = galleryItems.map((item) => item.original);
 
-// galleryItems.forEach((item) => {
-//   originImage.push(item.original);
-// });
 
-// function flippingPictures(evt) {
+function flippingPictures(evt) {
 
-//   let index = originImage.indexOf(refs.lightboxImage.src);
+  let index = originImage.indexOf(refs.lightboxImage.src);
 
-//   if(evt.code === "ArrowRigth") {
-
-//     if (index < originImage.length - 1) {
-//       refs.lightboxImage.setAttribute("src", originImage[index + 1]);
-//     }
-//      else {
-//        index = - 1;
-//        refs.lightboxImage.setAttribute("src", originImage[index + 1]);
-//      }
-//   }
-//   if (evt.code === "ArrowLeft") {
-//     if (index === 0) {
-//       index = originImage.length;
-//       refs.lightboxImage.setAttribute("src", originImage[index - 1]);
-//     } else refs.lightboxImage.setAttribute("src", originImage[index - 1]);
-//   }
-// }
+  if(evt.code === "ArrowRigth") {
+    if (index < originImage.length - 1) {
+      refs.lightboxImage.setAttribute("src", originImage[index + 1]);
+    }
+     else {
+       index = -1;
+       refs.lightboxImage.setAttribute("src", originImage[index + 1]);
+     }
+  }
+  if (evt.code === "ArrowLeft") {
+    if (index === 0) {
+      index = originImage.length;
+      refs.lightboxImage.setAttribute("src", originImage[index - 1]);
+    } 
+    else refs.lightboxImage.setAttribute("src", originImage[index - 1]);
+  }
+}
