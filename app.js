@@ -166,29 +166,29 @@ function onKeyPressEsc (evt) {
 
 /*Пролистывание изображений галереи в открытом модальном окне клавишами "влево" и "вправо". */
 
-// window.addEventListener("keydown", flippingPictures);
+window.addEventListener("keydown", flippingPictures);
 
-// const originImage = galleryItems.map((item) => item.original);
+const originImage = galleryItems.map((item) => item.original);
 
 
-// function flippingPictures(evt) {
+function flippingPictures(evt) {
 
-//   let index = originImage.indexOf(refs.lightboxImage.src);
+  let index = originImage.indexOf(refs.lightboxImage.src);
 
-//   if(evt.code === "ArrowRigth") {
-//     if (index < originImage.length - 1) {
-//       refs.lightboxImage.setAttribute("src", originImage[index + 1]);
-//     }
-//      else {
-//        index = -1;
-//        refs.lightboxImage.setAttribute("src", originImage[index + 1]);
-//      }
-//   }
-//   if (evt.code === "ArrowLeft") {
-//     if (index === 0) {
-//       index = originImage.length;
-//       refs.lightboxImage.setAttribute("src", originImage[index - 1]);
-//     } 
-//     else refs.lightboxImage.setAttribute("src", originImage[index - 1]);
-//   }
-// }
+  if(evt.code === "ArrowRight") {
+    if (index < originImage.length - 1) {
+      refs.lightboxImage.setAttribute("src", originImage[index + 1]);
+    }
+     else {
+       index = -1;
+       refs.lightboxImage.setAttribute("src", originImage[index + 1]);
+     }
+  }
+  if (evt.code === "ArrowLeft") {
+    if (index === 0) {
+      index = originImage.length;
+      refs.lightboxImage.setAttribute("src", originImage[index - 1]);
+    } 
+    else refs.lightboxImage.setAttribute("src", originImage[index - 1]);
+  }
+}
